@@ -1,6 +1,7 @@
 package com.anselmdevelopment.multiviewadapterrecyclerviewdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,37 +11,38 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Create a recyclerview object
-    private RecyclerView contactsRecView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        contactsRecView = findViewById(R.id.contactsRecView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvMainActivity);
 
-        // Create a new ArrayList called "contacts"
-        ArrayList<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("Jake", "jake@protonmail.com", "https://github.com/android/sunflower/blob/main/screenshots/phone_plant_detail.png"));
-        contacts.add(new Contact("Henry", "henry@gmail.com", "https://github.com/android/sunflower/blob/main/screenshots/phone_plant_detail.png"));
-        contacts.add(new Contact("George", "george@criptext.com", "https://github.com/android/sunflower/blob/main/screenshots/phone_plant_detail.png"));
-        contacts.add(new Contact("James", "james@gmail.com", "https://github.com/android/sunflower/blob/main/screenshots/phone_plant_detail.png"));
-        contacts.add(new Contact("Zach", "zach@yahoo.com", "https://github.com/android/sunflower/blob/main/screenshots/phone_plant_detail.png"));
+        ArrayList<RecycleItem> arrayList = new ArrayList<>();
 
-        // Create a new adapter
-        ContactsRecViewAdapter adapter = new ContactsRecViewAdapter(this);
-        // Put the arraylist into the adapter
-        adapter.setContacts(contacts);
+        for (int i = 0; i <= 25; i++) {
+            RecycleItem recycleItem = new RecycleItem();
 
-        contactsRecView.setAdapter(adapter);
-        contactsRecView.setLayoutManager(new LinearLayoutManager(this));
+            if (i % 2 == 0) {
+                recycleItem.setRow_type("1");
+                recycleItem.setText("First element");
+                recycleItem.setImage_url("http://www.androhub.com/wp-content/uploads/2015/09/staggeredrecyclerview_banner.jpg");
+            } else if (i % 3 == 0) {
+                recycleItem.setRow_type("2");
+                recycleItem.setText("Second element");
+                recycleItem.setImage_url("http://i.stack.imgur.com/snB84.png");
+            } else {
+                recycleItem.setRow_type("3");
+                recycleItem.setText("Third element");
+                recycleItem.setImage_url("http://inducesmile.com/wp-content/uploads/2015/05/gridbanner.jpg");
+            }
+            arrayList.add(recycleItem);
+        }
 
-        // If you want a horizontal layout
-//        contactsRecView.setLayoutManager(new LinearLayoutManager(this,
-//                LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
-        // If you want a grid layout
-//        contactsRecView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(new RecycleDataAdapter(this, arrayList));
     }
 }
