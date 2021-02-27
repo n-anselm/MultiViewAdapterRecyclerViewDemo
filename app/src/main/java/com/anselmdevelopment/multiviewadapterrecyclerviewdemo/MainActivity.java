@@ -18,26 +18,29 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvMainActivity);
 
+        // Create a new ArrayList
         ArrayList<RecycleItem> arrayList = new ArrayList<>();
 
-        for (int i = 0; i <= 25; i++) {
-            RecycleItem recycleItem = new RecycleItem();
-
-            if (i % 2 == 0) {
-                recycleItem.setRow_type("1");
-                recycleItem.setText("First element");
-                recycleItem.setImage_url("http://www.androhub.com/wp-content/uploads/2015/09/staggeredrecyclerview_banner.jpg");
-            } else if (i % 3 == 0) {
-                recycleItem.setRow_type("2");
-                recycleItem.setText("Second element");
-                recycleItem.setImage_url("http://i.stack.imgur.com/snB84.png");
-            } else {
-                recycleItem.setRow_type("3");
-                recycleItem.setText("Third element");
-                recycleItem.setImage_url("http://inducesmile.com/wp-content/uploads/2015/05/gridbanner.jpg");
-            }
-            arrayList.add(recycleItem);
-        }
+        // Add all the items to the arraylist
+        arrayList.add(new RecycleItem("1", "Main Heading"));
+        arrayList.add(new RecycleItem("2", "Subheading"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("2", "Subheading"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("1", "Main Heading"));
+        arrayList.add(new RecycleItem("2", "Subheading"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("2", "Subheading"));
+        arrayList.add(new RecycleItem("3", "Item"));
+        arrayList.add(new RecycleItem("3", "Item"));
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 

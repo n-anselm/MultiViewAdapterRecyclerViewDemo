@@ -22,7 +22,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="Main Heading (1)"
+            android:text="Main Heading"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="25sp" />

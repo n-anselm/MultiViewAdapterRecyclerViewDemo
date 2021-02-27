@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,26 +25,20 @@ public class RecycleDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public class SubHeading extends RecyclerView.ViewHolder {
-        ImageView ivSubHeading;
-        ProgressBar pbSubHeading;
+        TextView tvSubHeading;
 
         public SubHeading(View v) {
             super(v);
-            this.ivSubHeading = (ImageView) v.findViewById(R.id.ivSubHeading);
-            this.pbSubHeading = (ProgressBar) v.findViewById(R.id.pbSubHeading);
+            this.tvSubHeading = (TextView) v.findViewById(R.id.tvSubHeading);
         }
     }
 
-    public class ViewCheckBox extends RecyclerView.ViewHolder {
-        TextView tvCheckBox;
-        ImageView ivCheckBox;
-        ProgressBar pbCheckBox;
+    public class Item extends RecyclerView.ViewHolder {
+        TextView tvItem;
 
-        public ViewCheckBox(View v) {
+        public Item(View v) {
             super(v);
-            this.tvCheckBox = (TextView) v.findViewById(R.id.tvCheckBox);
-            this.ivCheckBox = (ImageView) v.findViewById(R.id.ivCheckBox);
-            this.pbCheckBox = (ProgressBar) v.findViewById(R.id.pbCheckBox);
+            this.tvItem = (TextView) v.findViewById(R.id.tvItem);
         }
     }
 
@@ -60,14 +52,14 @@ public class RecycleDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         View itemView;
         if (viewType == 1) {
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_1st_main_heading, parent, false);
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_main_heading, parent, false);
             return new MainHeading(itemView);
         } else if (viewType == 2) {
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_2nd_sub_heading, parent, false);
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_sub_heading, parent, false);
             return new SubHeading(itemView);
         } else {
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_3rd_item, parent, false);
-            return new ViewCheckBox(itemView);
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_item, parent, false);
+            return new Item(itemView);
         }
     }
 
@@ -85,63 +77,20 @@ public class RecycleDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             final SubHeading subHeading = (SubHeading) holder;
 
-            subHeading.pbSubHeading.setVisibility(View.VISIBLE);
-//            Glide.with(context)
-//                    .load(recycleItem.getImage_url())
-//                    .fitCenter()
-//                    .crossFade()
-//                    .listener(new RequestListener<String, GlideDrawable>() {
-//                        @Override
-//                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                            if (e instanceof UnknownHostException)
-//                                subHeading.second_pb.setVisibility(View.VISIBLE);
-//
-//                            return false;
-//                        }
-//
-//                        @Override
-//                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                            subHeading.second_pb.setVisibility(View.GONE);
-//                            subHeading.second_data_iv.setVisibility(View.VISIBLE);
-//                            return false;
-//                        }
-//                    }).into(subHeading.second_data_iv);;
+            subHeading.tvSubHeading.setText(recycleItem.getText());
 
             // Else if the type is 3
         } else if (holder.getItemViewType() == 3) {
 
-            final ViewCheckBox itemHolder = (ViewCheckBox) holder;
+            final Item itemHolder = (Item) holder;
 
-            itemHolder.tvCheckBox.setText(recycleItem.getText());
-
-            itemHolder.pbCheckBox.setVisibility(View.VISIBLE);
-
-//            Glide.with(context)
-//                    .load(recycleItem.getImage_url())
-//                    .fitCenter()
-//                    .crossFade()
-//                    .listener(new RequestListener<String, GlideDrawable>() {
-//                        @Override
-//                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                            if (e instanceof UnknownHostException)
-//                                itemHolder.third_pb.setVisibility(View.VISIBLE);
-//
-//                            return false;
-//                        }
-//
-//                        @Override
-//                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                            itemHolder.third_pb.setVisibility(View.GONE);
-//                            itemHolder.third_iv.setVisibility(View.VISIBLE);
-//                            return false;
-//                        }
-//                    }).into(itemHolder.third_iv);;
+            itemHolder.tvItem.setText(recycleItem.getText());
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return Integer.parseInt(data.get(position).getRow_type());
+        return Integer.parseInt(data.get(position).getViewType());
     }
 
     @Override
